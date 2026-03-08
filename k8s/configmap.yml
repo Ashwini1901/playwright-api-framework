@@ -1,0 +1,11 @@
+# Stores configuration separately from code
+# Change BASE_URL here without rebuilding the Docker image
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-config
+  namespace: qa-tests
+data:
+  BASE_URL: "https://jsonplaceholder.typicode.com"
+  TEST_ENV: "dev"
+  LOG_LEVEL: "warn"

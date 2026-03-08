@@ -1,0 +1,44 @@
+# A Job runs a Pod once, waits for completion, then stops
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: playwright-api-tests
+  namespace: qa-tests
+spec:
+  # If tests fail, retry up to 2 times
+  backoffLimit: 2
+
+  template:
+    metadata:
+      labels:
+        app: playwright-api-tests
+    spec:
+      # Never restart automatically — let Jenkins decide what to do
+      restartPolicy: Never
+
+      containers:
+        - name: playwright-tests
+          # Your Docker image (replace with your real registry)
+          image: your-registry/playwright-api-framework:latest
+
+          # How much CPU and memory this container can use
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+
+          # Load environment variables from ConfigMap
+          envFrom:
+            - configMapRef:
+                name: test-config
+
+          # Override specific env vars if needed
+          env:
+            - name: CI
+              value: "true"
+
+          # Run the tests
+          command: ["npm", "run", "test:ci"]

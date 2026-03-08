@@ -1,0 +1,7 @@
+# Creates an isolated space for all test resources
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: qa-tests
+  labels:
+    purpose: testing
