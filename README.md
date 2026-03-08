@@ -1,4 +1,4 @@
-![API Tests](https://github.com/YOUR_USERNAME/playwright-api-framework/actions/workflows/tests.yml/badge.svg)
+![API Tests](https://github.com/Ashwini1901/playwright-api-framework/actions/workflows/tests.yml/badge.svg)
 
 # Playwright API Automation Framework
 
